@@ -491,8 +491,6 @@ AI • Data Science • Full Stack Development
 
 <div align="center">
 
-### ⭐ If you found this project useful, consider giving it a star!
-
 Made with ❤️ for smarter, healthier cities.
 
 </div>
