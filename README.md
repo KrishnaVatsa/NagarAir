@@ -613,77 +613,6 @@ The FastAPI backend exposes REST APIs that power the frontend dashboard.
 - NASA FIRMS API
 
 ---
-
-# 📷 Application Preview
-
-Include screenshots of the following pages in this section.
-
-### Home Dashboard
-
-> *(Insert Screenshot)*
-
----
-
-### Interactive AQI Map
-
-> *(Insert Screenshot)*
-
----
-
-### AQI Forecast Panel
-
-> *(Insert Screenshot)*
-
----
-
-### SHAP Explainability
-
-> *(Insert Screenshot)*
-
----
-
-### Source Attribution
-
-> *(Insert Screenshot)*
-
----
-
-### Wind Plume Visualization
-
-> *(Insert Screenshot)*
-
----
-
-### NASA FIRMS Fire Overlay
-
-> *(Insert Screenshot)*
-
----
-
-### Intervention Simulator
-
-> *(Insert Screenshot)*
-
----
-
-### Priority Heat Map
-
-> *(Insert Screenshot)*
-
----
-
-### Citizen Health Advisory
-
-> *(Insert Screenshot)*
-
----
-
-### Administrator Dashboard
-
-> *(Insert Screenshot)*
-
----
-
 # 🌍 Supported Cities
 
 NagarAir currently supports monitoring stations in:
@@ -695,17 +624,6 @@ NagarAir currently supports monitoring stations in:
 The platform is designed to support additional cities as more monitoring data becomes available.
 
 ---
-
-# ⚠️ Project Limitations
-
-- Forecast quality depends on the availability and quality of historical AQI data.
-- Intervention simulations are currently calibrated for Delhi using publicly available source-apportionment studies.
-- For cities without sufficient calibration data, intervention simulations are intentionally unavailable.
-- Satellite fire hotspots assist source attribution but are not used directly as forecasting inputs.
-- Priority Heat Map visualizes monitoring stations and should not be interpreted as ward-level pollution mapping.
-
----
-
 # 🚀 Future Scope
 
 Potential directions for future development include:
@@ -720,21 +638,6 @@ Potential directions for future development include:
 - Advanced GIS visualizations
 - Reinforcement Learning for intervention optimization
 - Multi-language support
-
----
-
-# 🤝 Contributing
-
-Contributions, suggestions, and feedback are welcome.
-
-To contribute:
-
-1. Fork the repository.
-2. Create a new feature branch.
-3. Commit your changes.
-4. Push the branch.
-5. Open a Pull Request.
-
 ---
 
 # 📄 License
@@ -746,14 +649,6 @@ This project is licensed under the MIT License.
 # 👥 Team
 
 Developed for **ET AI Hackathon 2026**
-
-**Team Members**
-
-- Krishna Vatsa
-- Anand
-- Divyansh
-- Kaustuv
-
 ---
 
 # 🙏 Acknowledgements
@@ -775,6 +670,5 @@ We would like to acknowledge:
 
 **Building AI-powered decision support systems for healthier and more sustainable cities.**
 
-⭐ **If you found this project useful, consider giving it a star!**
-
 </div>
+<div align="center"> Made with ❤️ by Team HackSmith for smarter, healthier cities. </div>
