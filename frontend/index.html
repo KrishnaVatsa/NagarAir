@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NagarAir — Urban Air Quality Intelligence</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand">
+      <div class="brand-mark">N</div>
+      <div class="brand-text">
+        <h1>NagarAir</h1>
+        <div class="tag"><span class="pulse"></span>URBAN AIR QUALITY INTELLIGENCE</div>
+      </div>
+    </div>
+    <div class="horizon-toggle" id="horizonToggle">
+      <button data-h="24" class="active">+24H</button>
+      <button data-h="48">+48H</button>
+      <button data-h="72">+72H</button>
+    </div>
+  </header>
+
+  <div id="sidebar">
+    <h2>Monitoring stations</h2>
+    <div id="apiStatus" class="api-status"></div>
+    <div id="stationList"><div class="placeholder">Connecting to forecast API…</div></div>
+  </div>
+
+  <div style="position:relative;">
+    <div id="map"></div>
+    <div class="detail-panel" id="detailPanel">
+      <div class="dp-title" id="dpTitle">—</div>
+      <div class="dp-sub" id="dpSub">—</div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-label">Current AQI</div>
+          <div class="metric-value" id="dpCurrent">—</div>
+          <div class="metric-badge" id="dpCurrentLabel"></div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-label" id="dpHorizonLabel">Forecast +24h</div>
+          <div class="metric-value small" id="dpPredicted">—</div>
+          <div class="delta" id="dpDelta"></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><span class="sw" style="background:#1fa85c"></span>Good</span>
+      <span><span class="sw" style="background:#84b52e"></span>Satisfactory</span>
+      <span><span class="sw" style="background:#e0ab13"></span>Moderate</span>
+      <span><span class="sw" style="background:#f0793a"></span>Poor</span>
+      <span><span class="sw" style="background:#e8432e"></span>Very Poor</span>
+      <span><span class="sw" style="background:#9c1f38"></span>Severe</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
