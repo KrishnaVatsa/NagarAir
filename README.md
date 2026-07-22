@@ -3,19 +3,26 @@
 # 🌍 NagarAir
 ### AI-Powered Urban Air Quality Intelligence Platform
 
-**From Air Quality Monitoring → Intelligent Urban Decision Making**
+### **From Air Quality Monitoring → Intelligent Urban Decision Making**
 
 <img src="https://img.shields.io/badge/React-18-blue?logo=react"/>
 <img src="https://img.shields.io/badge/FastAPI-Backend-green?logo=fastapi"/>
-<img src="https://img.shields.io/badge/XGBoost-ML-orange"/>
+<img src="https://img.shields.io/badge/XGBoost-Machine%20Learning-orange"/>
 <img src="https://img.shields.io/badge/SHAP-Explainable%20AI-red"/>
 <img src="https://img.shields.io/badge/Open--Meteo-Live%20Weather-blue"/>
+<img src="https://img.shields.io/badge/NASA-FIRMS%20Satellite-orange"/>
 <img src="https://img.shields.io/badge/License-MIT-success"/>
 
 ---
 
-### 🏆 ET AI Hackathon 2026
-**Problem Statement PS5 — AI-Powered Urban Air Quality Intelligence for Smart City Intervention**
+## 🏆 ET AI Hackathon 2026
+
+### Problem Statement PS5
+### **AI-Powered Urban Air Quality Intelligence for Smart City Intervention**
+
+---
+
+### Predict • Explain • Prioritize • Simulate • Act
 
 </div>
 
@@ -23,281 +30,574 @@
 
 # 📖 Overview
 
-NagarAir is an **AI-powered Urban Air Quality Intelligence Platform** designed to help city administrators predict air pollution before it becomes dangerous.
+NagarAir is an **AI-powered Urban Air Quality Intelligence Platform** designed to help city administrators and citizens understand, predict, and respond to urban air pollution through data-driven decision making.
 
-Unlike traditional AQI dashboards that simply display sensor readings, NagarAir transforms raw environmental data into **actionable intelligence** using Machine Learning, Explainable AI, geospatial reasoning, live weather forecasting, and regulatory recommendations.
+Unlike conventional AQI dashboards that only display current pollution levels, NagarAir combines **Machine Learning, Explainable AI, Live Weather Intelligence, Geospatial Analysis, Satellite Data, and Government Air Quality Guidelines** into a single platform that supports proactive environmental management.
 
-The platform predicts air quality **24, 48, and 72 hours in advance**, explains every prediction using **real SHAP values**, identifies probable pollution sources, detects pollution movement using wind analysis, and recommends interventions based on India's **Graded Response Action Plan (GRAP).**
+The platform forecasts air quality **24, 48, and 72 hours in advance**, explains every prediction using **real SHAP-based feature attribution**, estimates probable pollution sources, analyses pollution movement using live wind information, visualizes satellite-detected fire hotspots, recommends GRAP-based administrative actions, simulates the impact of pollution-control interventions, prioritizes high-risk monitoring stations, and provides health advisories for citizens.
 
 ---
 
-# 🚀 Why NagarAir?
+# 🎯 Why NagarAir?
 
-Most air quality platforms answer only one question:
+Most air-quality platforms answer only one question:
 
 > **"What is the AQI right now?"**
 
-NagarAir answers much more:
+For effective urban planning, city authorities need much more than current observations.
 
-- 🔮 What will AQI be tomorrow?
-- 📈 Why will AQI increase?
-- 🌬️ Where is pollution coming from?
-- 🚨 Which areas require immediate intervention?
-- 🏛️ What actions should city authorities take?
-- 👨‍⚕️ What health advisory should citizens follow?
+NagarAir is designed to answer questions such as:
+
+- 🔮 What will AQI be over the next 24, 48 and 72 hours?
+- 📈 Why is pollution expected to increase?
+- 🌬️ Where is the pollution likely coming from?
+- 🛰 Are nearby fire hotspots contributing to poor air quality?
+- 🚨 Which monitoring stations require immediate attention?
+- 🏛 Which intervention could improve tomorrow's AQI?
+- 👨‍⚕️ What precautions should citizens follow?
+
+By combining forecasting, explainability, satellite intelligence, environmental reasoning, and decision support, NagarAir transforms air-quality monitoring into actionable urban intelligence.
+
+---
+
+# ✨ Core Capabilities
+
+NagarAir combines multiple AI and environmental intelligence components into a unified decision-support platform.
+
+### 📈 AI-Based AQI Forecasting
+
+- 24-hour AQI prediction
+- 48-hour AQI prediction
+- 72-hour AQI prediction
+- Multi-model XGBoost forecasting pipeline
+
+---
+
+### 🧠 Explainable AI
+
+Every prediction is accompanied by SHAP-based explanations showing:
+
+- Most influential features
+- Positive and negative contributors
+- Feature importance ranking
+- Transparent prediction reasoning
+
+---
+
+### 🌬️ Pollution Source Attribution
+
+The platform combines multiple environmental signals including:
+
+- Land-use profile
+- Wind direction
+- Wind speed
+- Seasonal conditions
+- Live NASA FIRMS satellite observations
+
+to estimate the most probable pollution source.
+
+---
+
+### 🛰 Live Satellite Intelligence
+
+NagarAir integrates **NASA FIRMS (Fire Information for Resource Management System)** to visualize active fire hotspots across North India.
+
+Satellite observations are incorporated into the Source Attribution Agent to improve pollution-source reasoning. Whenever live satellite data is unavailable, the platform transparently falls back to a seasonal fire-risk model without interrupting system functionality.
+
+---
+
+### 🏛 Intervention Simulator
+
+The Intervention Simulator enables city administrators to estimate the potential impact of different pollution-control measures before implementation.
+
+Available intervention scenarios include:
+
+- Construction Ban
+- Truck Movement Reduction
+- Odd-Even Traffic Scheme
+- Diesel Generator Ban
+- Stubble Burning Control
+
+Each simulation presents:
+
+- Current forecast
+- Forecast after intervention
+- Estimated AQI improvement
+- Model assumptions
+- Methodology disclaimer
+
+The simulator is calibrated for **Delhi** using publicly available source-apportionment studies. For other cities, the platform explicitly indicates that sufficient calibration data is unavailable instead of generating unsupported estimates.
+
+---
+
+### 🔥 Priority Heat Map
+
+The Administrator Dashboard includes a Priority Heat Map that ranks monitoring stations according to predicted pollution severity.
+
+The visualization helps authorities:
+
+- Identify the most critical stations
+- Prioritize field response
+- Allocate resources efficiently
+- Focus on areas requiring immediate intervention
+
+The heat map operates strictly at the monitoring-station level and does not infer ward-level pollution information.
 
 ---
 
 # ✨ Key Features
 
-## 🌎 Live Interactive AQI Dashboard
+## 🌍 Interactive Air Quality Dashboard
 
-- Interactive city map
-- Color-coded monitoring stations
-- Official AQI categories
-- Station-wise details
+The dashboard provides a comprehensive view of urban air quality through an interactive map and AI-powered analytics.
+
+Features include:
+
+- Interactive monitoring station map
+- Live AQI visualization
 - Historical AQI trends
-- Forecast horizon selector
+- Multi-horizon forecasting
+- Source Attribution
+- Wind Plume Tracking
+- Live Satellite Fire Overlay
+- GRAP Recommendations
+- Citizen Health Advisory
+- Administrator Dashboard
+- Intervention Simulator
+- Priority Heat Map
 
-Supported Forecasts
+Supported Forecast Horizons:
 
-- 24 Hours
-- 48 Hours
-- 72 Hours
-
----
-
-## 📈 AI Forecasting Engine
-
-NagarAir predicts future AQI using three independently trained **XGBoost regression models.**
-
-Each model is optimized for a different prediction horizon:
-
-| Model | Prediction |
-|---------|------------|
-| 24h | Next Day AQI |
-| 48h | Two-Day Forecast |
-| 72h | Three-Day Forecast |
-
-Models use:
-
-- Lag Features
-- Rolling Statistics
-- Cyclical Time Encoding
-- Historical AQI Patterns
+| Horizon | Prediction |
+|----------|------------|
+| 24 Hours | Next-Day AQI |
+| 48 Hours | Two-Day AQI |
+| 72 Hours | Three-Day AQI |
 
 ---
 
-# 🧠 Multi-Agent Air Intelligence Orchestrator
+# 📈 AI Forecasting Engine
 
-Instead of showing a single prediction, NagarAir runs every forecast through a **five-agent reasoning pipeline** that exposes the decision-making process to users. This architecture is described in the project documentation and is fully visible in the UI. :contentReference[oaicite:1]{index=1}
+NagarAir uses three independently trained **XGBoost Regression Models**, each optimized for a different forecasting horizon.
+
+| Model | Purpose |
+|---------|---------|
+| AQI-24 | Predict AQI 24 Hours Ahead |
+| AQI-48 | Predict AQI 48 Hours Ahead |
+| AQI-72 | Predict AQI 72 Hours Ahead |
+
+Each model learns from:
+
+- Historical AQI observations
+- Lag-based features
+- Rolling statistical features
+- Seasonal trends
+- Time-based cyclical encoding
+
+instead of relying on simple extrapolation, enabling more reliable forecasts for proactive urban planning and environmental decision making.
 
 ---
+# 🏗 System Architecture
 
-## 1️⃣ Forecast Agent
-
-Responsible for:
-
-- Selecting correct forecasting model
-- Predicting AQI
-- Identifying AQI category
-- Returning confidence information
-
-Output:
+NagarAir follows a client-server architecture that combines Machine Learning, Explainable AI, Live Weather Intelligence, Satellite Data, and interactive visualization to support informed urban air-quality decision making.
 
 ```
-Current AQI
-Predicted AQI
-AQI Band
-Forecast Horizon
-```
-
----
-
-## 2️⃣ Explainability Agent
-
-Uses **SHAP (SHapley Additive Explanations)** to explain:
-
-- Why prediction changed
-- Most influential features
-- Positive & negative contributors
-- Feature importance ranking
-
-Unlike static explanations, these are computed **live** for each prediction.
-
-Example:
-
-```
-Top Contributors
-
-✓ AQI 1 Hour Ago
-✓ 24-Hour Rolling Mean
-✓ Month
-✓ AQI Last Week
-✓ City Indicator
+                    User Interface (React + Vite)
+                               │
+                               ▼
+                     FastAPI Backend Server
+                               │
+        ┌──────────────┬──────────────┬──────────────┐
+        │              │              │              │
+        ▼              ▼              ▼              ▼
+ AQI Forecast     SHAP Analysis   Weather API   NASA FIRMS API
+   Models          Engine            Data        Fire Hotspots
+        │              │              │              │
+        └──────────────┴──────────────┴──────────────┘
+                               │
+                               ▼
+                    Interactive Decision Dashboard
 ```
 
 ---
 
-## 3️⃣ Risk Escalation Agent
+# 🧠 Core AI Components
 
-Determines whether pollution is:
-
-- Stable
-- Improving
-- Elevated
-- Critical
-
-Detects severity jumps such as:
-
-```
-Moderate → Poor
-Poor → Very Poor
-Very Poor → Severe
-```
+NagarAir combines several AI-powered components to transform raw environmental observations into meaningful insights for city administrators and citizens.
 
 ---
 
-## 4️⃣ Source Attribution Agent
+## 📈 AQI Forecasting Engine
 
-Combines multiple information sources:
+The forecasting engine predicts future Air Quality Index values for multiple forecasting horizons using independently trained XGBoost regression models.
 
-- Land-use profile
-- Live wind direction
-- Live wind speed
-- Seasonal fire-risk indicator
+Supported forecast horizons include:
 
-Predicts likely pollution source:
+- 24 Hour Forecast
+- 48 Hour Forecast
+- 72 Hour Forecast
+
+The models use engineered temporal features and historical AQI observations to estimate future pollution levels before they occur.
+
+---
+
+## 🔍 Explainable AI (SHAP)
+
+Every forecast generated by NagarAir is accompanied by an explanation generated using SHAP (SHapley Additive Explanations).
+
+Rather than acting as a black-box model, the system identifies the factors that influenced each prediction by displaying:
+
+- Feature importance
+- Positive contributors
+- Negative contributors
+- Relative impact of environmental variables
+
+This improves transparency and allows users to better understand the reasoning behind each forecast.
+
+---
+
+## 🌬 Source Attribution
+
+Understanding why pollution increases is as important as predicting it.
+
+The Source Attribution module combines:
+
+- Wind Direction
+- Wind Speed
+- Seasonal Conditions
+- Land-Use Characteristics
+- Live Satellite Fire Data
+
+to estimate the most probable contributors to poor air quality.
+
+Possible pollution sources include:
 
 - Vehicular Emissions
 - Industrial Activity
 - Construction Dust
-- Agricultural Burning
-- Mixed Sources
+- Biomass Burning
+- Agricultural Fires
+- Regional Pollution Transport
 
 ---
 
-## 5️⃣ Advisory & Intervention Agent
+## 🛰 Live Satellite Fire Monitoring
 
-Matches predicted AQI against **India's official GRAP framework** to generate legally grounded recommendations for administrators and station-specific interventions. :contentReference[oaicite:2]{index=2}
+NagarAir integrates NASA FIRMS (Fire Information for Resource Management System) to retrieve active fire hotspots detected by satellite.
 
-Examples:
+Satellite observations are used to improve pollution-source analysis by identifying nearby biomass-burning events that may influence local air quality.
 
-- Construction Restrictions
-- Traffic Control
-- Public Transport Intensification
-- Generator Restrictions
-- School Advisory
-- Dust Control Measures
+Features include:
 
----
-
-# 🌬️ Wind Plume Tracking
-
-A unique feature that analyses pollution movement between stations.
-
-Checks:
-
-- Wind direction
-- Wind speed
-- Station distance
-- AQI severity
-
-If pollution is expected to move:
-
-```
-Station A
-      ↓
-Wind Direction
-      ↓
-Station B
-
-⚠ Pollution likely to reach Station B
-```
-
-This provides administrators with lead time to act before downwind stations are affected. :contentReference[oaicite:3]{index=3}
+- Live fire hotspot retrieval
+- Interactive hotspot visualization
+- Source Attribution support
+- Automatic fallback to seasonal fire-risk estimation when live data is unavailable
 
 ---
 
-# 🏛️ Administrator Command Center
+## 🌪 Wind Plume Visualization
 
-Designed specifically for urban administrators.
+Wind conditions significantly influence the movement of airborne pollutants.
 
-Provides:
+NagarAir visualizes:
 
-- City-wide AQI ranking
-- Highest-risk stations
-- GRAP Stage
+- Wind Direction
+- Wind Speed
+- Estimated Pollution Flow
+
+This helps users interpret AQI forecasts and understand how pollutants may travel between regions.
+
+---
+
+# 🏛 Administrator Dashboard
+
+The Administrator Dashboard is designed to assist environmental authorities with pollution monitoring, prioritization, and intervention planning.
+
+Major capabilities include:
+
+- Multi-horizon AQI forecasting
+- Explainable AI insights
+- GRAP recommendations
 - Source Attribution
-- Forecast AQI
-- Active Plume Alerts
-- Intervention Priority
-
-Rather than exploring stations one by one, administrators can immediately identify the most urgent locations and required actions. :contentReference[oaicite:4]{index=4}
+- Satellite fire visualization
+- Priority Heat Map
+- Intervention Simulator
 
 ---
 
-# 👨‍⚕️ Citizen Health Advisory
+## 🔥 Priority Heat Map
 
-Citizen-friendly dashboard including:
+The Priority Heat Map ranks monitoring stations according to predicted AQI severity.
 
-- AQI health category
-- Bilingual support
-- Risk explanation
-- Recommended precautions
+The visualization enables administrators to:
 
-Languages:
+- Identify high-risk stations
+- Prioritize field operations
+- Allocate resources effectively
+- Respond proactively to deteriorating air quality
 
-- 🇬🇧 English
-- 🇮🇳 Hindi
+The heat map represents monitoring stations only and does not infer pollution at the ward or neighborhood level.
 
 ---
 
-# 🗂 Project Structure
+## 🧪 Intervention Simulator
+
+The Intervention Simulator estimates the potential impact of selected pollution-control measures before implementation.
+
+Available intervention scenarios include:
+
+- Construction Ban
+- Truck Movement Reduction
+- Odd-Even Traffic Scheme
+- Diesel Generator Ban
+- Stubble Burning Control
+
+Simulation results include:
+
+- Current AQI Forecast
+- Simulated AQI
+- Estimated AQI Reduction
+- Model Assumptions
+- Methodology Disclaimer
+
+The simulator is currently calibrated for Delhi using publicly available source-apportionment studies. For cities without sufficient calibration data, the platform explicitly indicates that simulation results are unavailable rather than generating unsupported estimates.
+
+---
+
+## 📋 GRAP Recommendation System
+
+Based on forecasted AQI values, NagarAir maps pollution severity to the corresponding stage of India's Graded Response Action Plan (GRAP).
+
+These recommendations provide decision support for administrative planning while leaving final implementation decisions to the responsible authorities.
+
+---
+
+# 👨‍⚕ Citizen Dashboard
+
+The Citizen Dashboard presents air-quality information in an intuitive and accessible format.
+
+Users can explore:
+
+- Current AQI
+- Forecasted AQI
+- AQI Trends
+- Health Advisories
+- Pollution Source Analysis
+- Wind Information
+- Satellite Fire Hotspots
+
+The interface is designed to help citizens understand local air quality and take appropriate precautions.
+
+---
+
+## ❤️ Health Advisory
+
+Based on predicted AQI levels, NagarAir provides health guidance tailored to different pollution categories.
+
+The advisory includes:
+
+- AQI Category
+- Health Risk
+- Recommended Precautions
+- Outdoor Activity Guidance
+- Sensitive Group Recommendations
+
+These advisories support informed decision-making during periods of poor air quality.
+
+---
+
+# 🌍 Supported Cities
+
+The current implementation supports monitoring stations across:
+
+- Delhi
+- Chandigarh
+- Begusarai
+
+The architecture is designed to support additional cities as historical monitoring data becomes available.
+
+---
+
+# 📂 Project Structure
 
 ```
 NagarAir/
-
 │
 ├── backend/
-│   └── forecast_api.py
+│   ├── forecast_api.py
+│   └── __pycache__/
 │
 ├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css
+│   └── package-lock.json
 │
 ├── frontend-react/
 │   ├── src/
 │   │   ├── components/
+│   │   │   ├── AdminView.jsx
+│   │   │   ├── AdvisoryPanel.jsx
+│   │   │   ├── AgentTrace.jsx
+│   │   │   ├── DetailPanel.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── InterventionSimulator.jsx
+│   │   │   ├── Legend.jsx
+│   │   │   ├── MapView.jsx
+│   │   │   ├── PriorityHeatMap.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── StationCard.jsx
+│   │   │   └── TrendChart.jsx
+│   │   │
 │   │   ├── utils/
-│   │   ├── api.js
+│   │   │   ├── advisory.js
+│   │   │   ├── aqi.js
+│   │   │   └── api.js
+│   │   │
 │   │   ├── App.jsx
 │   │   ├── main.jsx
 │   │   └── styles.css
 │   │
+│   ├── index.html
 │   ├── package.json
-│   ├── vite.config.js
-│   └── index.html
+│   ├── package-lock.json
+│   └── vite.config.js
 │
-├── start.bat
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-# 🛠 Technology Stack
+# ⚙ Technology Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Frontend | React, Vite, JavaScript, HTML5, CSS3 |
+| Backend | FastAPI, Python |
+| Machine Learning | XGBoost, SHAP, Scikit-learn |
+| Data Processing | Pandas, NumPy |
+| APIs | Open-Meteo API, NASA FIRMS API |
+| Visualization | Leaflet, Chart.js |
+
+---
+# 🚀 Getting Started
+
+Follow these steps to run NagarAir locally.
+
+---
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/<your-username>/NagarAir.git
+cd NagarAir
+```
+
+---
+
+## 2️⃣ Backend Setup
+
+Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the FastAPI server:
+
+```bash
+uvicorn forecast_api:app --reload
+```
+
+The backend will be available at:
+
+```
+http://127.0.0.1:8000
+```
+
+Interactive API Documentation:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## 3️⃣ Frontend Setup
+
+Open a new terminal and navigate to the React frontend.
+
+```bash
+cd frontend-react
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The frontend will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 📡 API Endpoints
+
+The FastAPI backend exposes REST APIs that power the frontend dashboard.
+
+| Endpoint | Description |
+|----------|-------------|
+| `/forecast` | Predict AQI for 24, 48 or 72 hours |
+| `/history` | Retrieve historical AQI data |
+| `/stations` | List all supported cities and monitoring stations |
+| `/agent/analyze` | Generate pollution source attribution |
+| `/simulate` | Estimate the impact of pollution-control interventions |
+| `/satellite/fires` | Retrieve nearby NASA FIRMS fire hotspots |
+
+---
+
+# 📊 Technologies Used
 
 ## Frontend
 
-- React 18
+- React
 - Vite
-- React Leaflet
-- Recharts
+- JavaScript
+- HTML5
 - CSS3
+- Leaflet
+- Chart.js
+
+---
 
 ## Backend
 
 - FastAPI
-- Uvicorn
 - Python
+- Pandas
+- NumPy
+- Requests
+- Joblib
+
+---
 
 ## Machine Learning
 
@@ -305,192 +605,176 @@ NagarAir/
 - SHAP
 - Scikit-learn
 
-## Data Processing
+---
 
-- Pandas
-- NumPy
-- OpenPyXL
-
-## Live APIs
+## External APIs
 
 - Open-Meteo Weather API
+- NASA FIRMS API
 
 ---
 
-# 📊 Dataset
+# 📷 Application Preview
 
-Primary Dataset:
+Include screenshots of the following pages in this section.
 
-**Central Pollution Control Board (CPCB)**
+### Home Dashboard
 
-Includes:
-
-- Hourly AQI
-- Multiple Cities
-- Multiple Stations
-- Historical Records
-
-Dataset Size
-
-```
-54,193+
-Hourly Records
-```
-
-The accompanying technical document states the implementation uses one year of CPCB hourly AQI data across multiple stations and cities, along with live weather and static geospatial context. :contentReference[oaicite:5]{index=5}
+> *(Insert Screenshot)*
 
 ---
 
-# 📈 Model Performance
+### Interactive AQI Map
 
-| Horizon | Baseline RMSE | Model RMSE | Improvement |
-|----------|--------------:|-----------:|------------:|
-| 24 Hours | 50.77 | 44.31 | **12.7%** |
-| 48 Hours | 63.40 | 49.64 | **21.7%** |
-| 72 Hours | 73.62 | 52.19 | **29.1%** |
-
-These results were evaluated using a chronological hold-out test set against a naive persistence baseline, as documented in the project report. :contentReference[oaicite:6]{index=6}
+> *(Insert Screenshot)*
 
 ---
 
-# ⚙ Installation
+### AQI Forecast Panel
 
-## Clone Repository
-
-```bash
-git clone https://github.com/yourusername/NagarAir.git
-
-cd NagarAir
-```
+> *(Insert Screenshot)*
 
 ---
 
-## Backend
+### SHAP Explainability
 
-```bash
-cd backend
-
-pip install fastapi uvicorn joblib pandas xgboost shap requests
-
-python -m uvicorn forecast_api:app --reload --port 8000
-```
+> *(Insert Screenshot)*
 
 ---
 
-## Frontend
+### Source Attribution
 
-```bash
-cd frontend-react
-
-npm install
-
-npm run dev
-```
-
-Open
-
-```
-http://127.0.0.1:5500
-```
+> *(Insert Screenshot)*
 
 ---
 
-# 📁 Required Files
+### Wind Plume Visualization
 
-```
-C:\AQI DATA\
-
-master_aqi_dataset.csv
-
-aqi_forecast_model_24h.pkl
-
-aqi_forecast_model_48h.pkl
-
-aqi_forecast_model_72h.pkl
-```
-
-If your dataset path changes, update:
-
-```
-forecast_api.py
-
-DATA_FILE
-
-MODEL_DIR
-```
+> *(Insert Screenshot)*
 
 ---
 
-# 🖥️ Screenshots
+### NASA FIRMS Fire Overlay
 
-```
-📍 Dashboard
-
-📍 Interactive Map
-
-📍 Trend Chart
-
-📍 Administrator Command Center
-
-📍 Air Intelligence Agents
-
-📍 Wind Plume Tracking
-
-📍 Citizen Health Advisory
-```
-
-(Add screenshots here before publishing.)
+> *(Insert Screenshot)*
 
 ---
 
-# 🎯 Future Improvements
+### Intervention Simulator
 
-- NASA FIRMS satellite integration
-- Live traffic APIs
-- Real GIS land-use layers
-- Support for 900+ monitoring stations
-- Regulatory audit trail
+> *(Insert Screenshot)*
+
+---
+
+### Priority Heat Map
+
+> *(Insert Screenshot)*
+
+---
+
+### Citizen Health Advisory
+
+> *(Insert Screenshot)*
+
+---
+
+### Administrator Dashboard
+
+> *(Insert Screenshot)*
+
+---
+
+# 🌍 Supported Cities
+
+NagarAir currently supports monitoring stations in:
+
+- Delhi
+- Chandigarh
+- Begusarai
+
+The platform is designed to support additional cities as more monitoring data becomes available.
+
+---
+
+# ⚠️ Project Limitations
+
+- Forecast quality depends on the availability and quality of historical AQI data.
+- Intervention simulations are currently calibrated for Delhi using publicly available source-apportionment studies.
+- For cities without sufficient calibration data, intervention simulations are intentionally unavailable.
+- Satellite fire hotspots assist source attribution but are not used directly as forecasting inputs.
+- Priority Heat Map visualizes monitoring stations and should not be interpreted as ward-level pollution mapping.
+
+---
+
+# 🚀 Future Scope
+
+Potential directions for future development include:
+
+- Support for additional Indian cities
 - Mobile application
-- Notification & alert system
-- Public REST API
-
-These future enhancements align with the limitations and roadmap documented for the current implementation. :contentReference[oaicite:7]{index=7}
+- IoT sensor integration
+- Real-time traffic data integration
+- Industrial emission datasets
+- Push notification alerts
+- Public API for third-party developers
+- Advanced GIS visualizations
+- Reinforcement Learning for intervention optimization
+- Multi-language support
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions, suggestions, and feedback are welcome.
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Open a Pull Request
+To contribute:
 
----
-
-# 📜 License
-
-This project is released under the MIT License.
+1. Fork the repository.
+2. Create a new feature branch.
+3. Commit your changes.
+4. Push the branch.
+5. Open a Pull Request.
 
 ---
 
-# 👨‍💻 Authors
+# 📄 License
 
-**Krishna Kumar**
-
-AI • Machine Learning 
+This project is licensed under the MIT License.
 
 ---
 
-**Yashi Piparsaniya**
+# 👥 Team
 
-AI • Data Science • Full Stack Development
+Developed for **ET AI Hackathon 2026**
+
+**Team Members**
+
+- Krishna Vatsa
+- Anand
+- Divyansh
+- Kaustuv
+
+---
+
+# 🙏 Acknowledgements
+
+We would like to acknowledge:
+
+- Central Pollution Control Board (CPCB) for public AQI data.
+- NASA FIRMS for satellite fire hotspot information.
+- Open-Meteo for weather data services.
+- The open-source community for the tools and libraries that made this project possible.
 
 ---
 
 <div align="center">
 
-Made with ❤️ for smarter, healthier cities.
+# 🌍 NagarAir
+
+### **Predict • Explain • Prioritize • Simulate • Act**
+
+**Building AI-powered decision support systems for healthier and more sustainable cities.**
+
+⭐ **If you found this project useful, consider giving it a star!**
 
 </div>
