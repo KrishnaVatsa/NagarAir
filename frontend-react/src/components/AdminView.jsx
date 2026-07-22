@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAdminOverview, fetchPlume } from "../api";
 import { aqiColor } from "../utils/aqi";
+import PriorityHeatMap from "./PriorityHeatMap";
 
 const URGENCY_ORDER = { critical: 0, elevated: 1, stable: 2, improving: 3 };
 
@@ -71,7 +72,9 @@ export default function AdminView({ horizon }) {
       )}
 
       {!loading && rows.length > 0 && (
-        <div className="admin-table-wrap">
+        <>
+          <PriorityHeatMap rows={rows} />
+          <div className="admin-table-wrap">
           <table className="admin-table">
             <thead>
               <tr>
@@ -107,7 +110,8 @@ export default function AdminView({ horizon }) {
               ))}
             </tbody>
           </table>
-        </div>
+          </div>
+        </>
       )}
     </div>
   );

@@ -263,19 +263,193 @@ def get_wind_forecast(lat: float, lon: float):
 def get_seasonal_fire_risk(month: int, city: str):
     """
     Static seasonal proxy for satellite-detected stubble-burning activity.
-    Punjab/Haryana stubble burning (Oct-Nov) is a well-documented,
-    satellite-monitored seasonal pollution source that especially affects
-    North India (Delhi, Chandigarh region). This is disclosed as a
-    known seasonal pattern, not a live satellite feed.
+    Used as a FALLBACK when live FIRMS data is unavailable (no API key
+    set, network issue, or rate limit). Punjab/Haryana stubble burning
+    (Oct-Nov) is a well-documented, satellite-monitored seasonal
+    pollution source affecting North India.
     """
     if city in ("Delhi", "Chandigarh") and month in (10, 11):
         return {
             "risk": "HIGH",
             "note": "Peak stubble-burning season in Punjab/Haryana — satellite fire-count data historically shows elevated regional smoke transport during this period.",
+            "source": "seasonal proxy (live satellite data unavailable)",
         }
     if month in (10, 11):
-        return {"risk": "MODERATE", "note": "Regional biomass-burning season."}
-    return {"risk": "LOW", "note": "Outside peak stubble-burning season."}
+        return {"risk": "MODERATE", "note": "Regional biomass-burning season.", "source": "seasonal proxy (live satellite data unavailable)"}
+    return {"risk": "LOW", "note": "Outside peak stubble-burning season.", "source": "seasonal proxy (live satellite data unavailable)"}
+
+
+# --- NASA FIRMS: real live satellite fire-hotspot detection ---
+# Requires a free API key from https://firms.modaps.eosdis.nasa.gov/api/map_key/
+# Paste it below. If left blank or the API call fails, the platform
+# gracefully falls back to the static seasonal proxy above — the UI
+# discloses which one was actually used.
+FIRMS_MAP_KEY = "2d049b714f33140db7dd4abef1166fed"
+
+# Bounding box covering North India (Punjab, Haryana, Delhi NCR, western UP)
+# where stubble-burning fires most directly affect Delhi/Chandigarh AQI.
+FIRMS_BBOX_NORTH_INDIA = "73,27,80,32"  # west,south,east,north
+
+_firms_cache = {"data": None, "fetched_at": None}
+
+
+def fetch_firms_hotspots(day_range: int = 2):
+    """
+    Fetches real active-fire detections from NASA FIRMS (VIIRS satellite,
+    near-real-time) within the North India bounding box. Cached for the
+    process lifetime + a short window to avoid hammering the API on
+    every request. Returns None if unavailable (missing key, network
+    error, rate limit) so callers can fall back gracefully.
+    """
+    if not FIRMS_MAP_KEY:
+        return None
+
+    now = pd.Timestamp.utcnow()
+    if _firms_cache["data"] is not None and _firms_cache["fetched_at"] is not None:
+        if (now - _firms_cache["fetched_at"]).total_seconds() < 1800:  # 30 min cache
+            return _firms_cache["data"]
+
+    try:
+        url = (
+            f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/"
+            f"{FIRMS_MAP_KEY}/VIIRS_SNPP_NRT/{FIRMS_BBOX_NORTH_INDIA}/{day_range}"
+        )
+        resp = requests.get(url, timeout=6)
+        resp.raise_for_status()
+        from io import StringIO
+        fire_df = pd.read_csv(StringIO(resp.text))
+        if fire_df.empty or "latitude" not in fire_df.columns:
+            hotspots = []
+        else:
+            hotspots = fire_df[["latitude", "longitude", "confidence", "acq_date"]].to_dict(orient="records")
+        _firms_cache["data"] = hotspots
+        _firms_cache["fetched_at"] = now
+        return hotspots
+    except Exception:
+        return None
+
+
+def get_fire_risk(lat: float, lon: float, month: int, city: str, radius_km: float = 100):
+    """
+    Real satellite fire-risk assessment: counts live FIRMS hotspots
+    within radius_km of a station. Falls back to the static seasonal
+    proxy if live data is unavailable.
+    """
+    hotspots = fetch_firms_hotspots()
+    if hotspots is None:
+        return get_seasonal_fire_risk(month, city)
+
+    nearby = [
+        h for h in hotspots
+        if haversine_km(lat, lon, h["latitude"], h["longitude"]) <= radius_km
+    ]
+    count = len(nearby)
+
+    if count == 0:
+        risk = "LOW"
+    elif count < 10:
+        risk = "MODERATE"
+    else:
+        risk = "HIGH"
+
+    return {
+        "risk": risk,
+        "note": f"{count} active fire hotspot(s) detected within {radius_km}km (NASA FIRMS, VIIRS satellite, last 48h).",
+        "source": "NASA FIRMS live satellite data",
+        "hotspot_count": count,
+    }
+
+
+# --- Intervention Simulator ---
+# IMPORTANT — methodology disclosure:
+# Source shares below are approximate figures drawn from published Delhi
+# PM2.5 source-apportionment studies (TERI-ARAI 2018; SAFAR-IITM). They
+# are NOT measured for this project — they are literature values used to
+# build a disclosed, simplified scenario estimator. The simulator applies
+# a linear proportional reduction to the AQI based on the targeted
+# source share(s) — this is NOT an atmospheric dispersion model or a
+# validated causal estimate. It is only calibrated for Delhi, where a
+# public source-apportionment breakdown exists; it is intentionally not
+# offered for Chandigarh or Begusarai, where no such published study was
+# available to ground it.
+SOURCE_SHARES = {
+    "Delhi": {
+        "vehicular": 0.23,
+        "industrial": 0.18,
+        "construction_dust": 0.17,
+        "biomass_seasonal": 0.15,
+        "domestic": 0.10,
+        "waste_burning": 0.04,
+        "other_background": 0.13,
+    }
+}
+
+INTERVENTIONS = {
+    "Delhi": [
+        {
+            "id": "construction_ban",
+            "label": "Ban construction & demolition activity (48h)",
+            "targets": {"construction_dust": 0.9},
+            "assumption": "Assumes a 48h ban eliminates ~90% of active construction-dust emissions (residual from material already disturbed/stored on site).",
+        },
+        {
+            "id": "truck_reduction_25",
+            "label": "Reduce truck/freight traffic by 25%",
+            "targets": {"vehicular": 0.10},
+            "assumption": "Assumes heavy vehicles (trucks/buses) account for ~40% of the vehicular source share; a 25% cut in truck traffic reduces total vehicular contribution by ~10%.",
+        },
+        {
+            "id": "odd_even",
+            "label": "Odd-even private vehicle scheme",
+            "targets": {"vehicular": 0.13},
+            "assumption": "Based on ~10-15% vehicular emission reduction observed in past Delhi odd-even trials (CSE / IIT Kanpur studies); midpoint of 13% used.",
+        },
+        {
+            "id": "diesel_genset_ban",
+            "label": "Ban diesel generator sets",
+            "targets": {"domestic": 0.5, "industrial": 0.05},
+            "assumption": "Gensets assumed to be a subset of domestic/small-commercial backup power (~50% of that share) plus a minor share of industrial backup power (~5%).",
+        },
+        {
+            "id": "stubble_control",
+            "label": "Regional stubble-burning control",
+            "targets": {"biomass_seasonal": 0.6},
+            "assumption": "Assumes coordinated regional action reduces seasonal biomass-burning contribution by ~60%; only meaningful during Oct-Nov season.",
+        },
+    ]
+}
+
+
+def simulate_intervention(city: str, predicted_aqi: float, intervention_id: str):
+    if city not in SOURCE_SHARES:
+        return None, "No published source-apportionment data available for this city — simulator is calibrated for Delhi only."
+
+    interventions = INTERVENTIONS.get(city, [])
+    intervention = next((iv for iv in interventions if iv["id"] == intervention_id), None)
+    if intervention is None:
+        return None, f"Unknown intervention id: {intervention_id}"
+
+    shares = SOURCE_SHARES[city]
+    reduction_fraction = 0.0
+    for source, cut in intervention["targets"].items():
+        reduction_fraction += shares.get(source, 0.0) * cut
+
+    # floor: don't simulate below the 'Good' band lower edge as a sanity bound
+    new_aqi = max(predicted_aqi * (1 - reduction_fraction), 15.0)
+
+    return {
+        "intervention": intervention["label"],
+        "assumption": intervention["assumption"],
+        "baseline_aqi": round(predicted_aqi, 1),
+        "simulated_aqi": round(new_aqi, 1),
+        "delta": round(new_aqi - predicted_aqi, 1),
+        "reduction_fraction": round(reduction_fraction, 3),
+        "methodology_note": (
+            "Simplified proportional estimate based on published Delhi PM2.5 "
+            "source-apportionment shares (TERI-ARAI 2018; SAFAR-IITM). This is "
+            "NOT an atmospheric dispersion simulation or a validated causal model."
+        ),
+    }, None
 
 
 # --- Wind plume tracking: is one station's pollution likely to drift
@@ -555,7 +729,7 @@ def agent_analyze(city: str, station: str, horizon: int = 24):
     wind = get_wind_forecast(station_lat, station_lon) if station_lat else {
         "wind_speed_kmh": None, "wind_direction_deg": None, "source": "unavailable"
     }
-    fire_risk = get_seasonal_fire_risk(latest_time.month, city)
+    fire_risk = get_fire_risk(station_lat, station_lon, latest_time.month, city) if station_lat else get_seasonal_fire_risk(latest_time.month, city)
 
     dispersion_note = "unknown"
     if wind["wind_speed_kmh"] is not None:
@@ -697,3 +871,56 @@ def admin_overview(horizon: int = 24):
 
     rows.sort(key=lambda r: r["predicted_aqi"], reverse=True)
     return rows
+
+
+@app.get("/interventions")
+def list_interventions(city: str):
+    """Lists available intervention scenarios for a city. Returns an
+    empty list (with an explanatory message) for cities without a
+    published source-apportionment study to ground the simulator."""
+    if city not in SOURCE_SHARES:
+        return {
+            "city": city,
+            "available": False,
+            "message": "Intervention Simulator is currently calibrated for Delhi only — no published source-apportionment data was available for this city.",
+            "interventions": [],
+        }
+    return {
+        "city": city,
+        "available": True,
+        "source_shares": SOURCE_SHARES[city],
+        "interventions": [
+            {"id": iv["id"], "label": iv["label"]} for iv in INTERVENTIONS[city]
+        ],
+    }
+
+
+@app.get("/simulate")
+def simulate(city: str, station: str, horizon: int, intervention_id: str):
+    input_df, latest_time, current_aqi, model = build_input_df(city, station, horizon)
+    predicted_aqi = float(model.predict(input_df)[0])
+
+    result, error = simulate_intervention(city, predicted_aqi, intervention_id)
+    if error:
+        raise HTTPException(status_code=400, detail=error)
+
+    return result
+
+
+@app.get("/satellite/fires")
+def satellite_fires():
+    """
+    Real NASA FIRMS active-fire hotspots (VIIRS satellite, near-real-time)
+    for the North India region, used to plot fire markers on the map.
+    Returns an empty list with an 'available: false' flag if no API key
+    is configured or the live call fails — the frontend shows this
+    honestly rather than pretending data exists.
+    """
+    hotspots = fetch_firms_hotspots()
+    if hotspots is None:
+        return {
+            "available": False,
+            "message": "Live NASA FIRMS data unavailable (no API key configured, or request failed). Seasonal fire-risk proxy is used elsewhere as a fallback.",
+            "hotspots": [],
+        }
+    return {"available": True, "hotspots": hotspots}

@@ -6,6 +6,7 @@ import DetailPanel from "./components/DetailPanel";
 import TrendChart from "./components/TrendChart";
 import AgentTrace from "./components/AgentTrace";
 import AdvisoryPanel from "./components/AdvisoryPanel";
+import InterventionSimulator from "./components/InterventionSimulator";
 import Legend from "./components/Legend";
 import AdminView from "./components/AdminView";
 import { fetchStations, fetchForecast } from "./api";
@@ -110,6 +111,11 @@ export default function App() {
               <AdvisoryPanel
                 station={selectedStation}
                 forecast={selectedKey ? forecasts[selectedKey] : null}
+              />
+              <InterventionSimulator
+                station={selectedStation}
+                forecast={selectedKey ? forecasts[selectedKey] : null}
+                horizon={horizon}
               />
             </div>
             <Legend />
